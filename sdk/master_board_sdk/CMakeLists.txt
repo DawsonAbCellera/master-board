@@ -17,6 +17,7 @@ SET(CMAKE_VERBOSE_MAKEFILE True)
 SET(PROJECT_NAME master-board-sdk)
 SET(PROJECT_DESCRIPTION "This project contains the sdk for the communication between a computer and the master-board")
 SET(PROJECT_URL https://github.com/open-dynamic-robot-initiative/master-board)
+set(PROJECT_USE_CMAKE_EXPORT TRUE)
 
 INCLUDE(cmake/base.cmake)
 INCLUDE(cmake/boost.cmake)
@@ -72,7 +73,10 @@ ADD_LIBRARY(${PROJECT_NAME} SHARED
   ${MASTER_BOARD_SRC}
 )
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} pthread)
-INSTALL(TARGETS ${PROJECT_NAME} DESTINATION lib)
+install(
+  TARGETS ${PROJECT_NAME}
+  EXPORT ${TARGETS_EXPORT_NAME}
+  DESTINATION lib)
 
 # --- BINDINGS -----------------------------------------------------------------
 
